@@ -1,22 +1,31 @@
+const main = document.getElementById("main-container");
 const counter = document.getElementById("counter");
-const resetButton = document.getElementById("reset-btn");
+const reset_btn = document.getElementById("reset");
 
-let count = 0;
+let counter_intern = 0;
 
 function render() {
-  counter.textContent = count;
-
-  counter.style.backgroundImage = `linear-gradient(90deg, yellow ${count}%, white 0%)`;
+  counter.textContent = counter_intern;
+  let prozent = counter_intern > 100 ? counter_intern % 100 : counter_intern;
+  main.style.backgroundImage =
+    "linear-gradient(90deg, gold " + prozent + "%, white " + prozent + "%)";
 }
 
-counter.addEventListener("click", function () {
-  count++;
+render();
 
+main.addEventListener("click", () => {
+  counter_intern++;
   render();
 });
 
-resetButton.addEventListener("click", function () {
-  count = 0;
-
+reset_btn.addEventListener("click", () => {
+  counter_intern = 0;
   render();
+});
+
+window.addEventListener("keydown", (event) => {
+  if (event.key == "Enter" || event.key == " ") {
+    counter_intern++;
+    render();
+  }
 });
